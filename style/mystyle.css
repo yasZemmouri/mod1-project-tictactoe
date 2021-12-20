@@ -1,0 +1,123 @@
+* {
+  margin: 0;
+}
+body {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+.container {
+  width: 450px;
+  margin: auto;
+  height: 450px;
+  /* background-color: red; */
+  /* overflow: hidden; */
+  position: relative;
+}
+
+.case {
+  float: left;
+  width: 150px;
+  height: 150px;
+  line-height: 150px;
+  font-size: 5rem;
+  text-align: center;
+  user-select: none;
+  position: relative;
+  z-index: 1000;
+  background-color: transparent;
+}
+
+.vlines,
+.hlines {
+  width: 150px;
+  height: 100%;
+  position: absolute;
+  /* background-color: rosybrown; */
+  left: 150px;
+}
+
+.hlines {
+  transform: rotate(90deg);
+}
+.hlines::before,
+.vlines::before,
+.hlines::after,
+.vlines::after {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 0;
+  position: absolute;
+  z-index: 500;
+  background-color: #663399;
+  border-radius: 100px;
+  animation: kiko 1.5s ease-out;
+  animation-delay: 1.5s;
+  animation-fill-mode: forwards;
+}
+
+.hlines::after,
+.vlines::after {
+  right: -5px;
+}
+.hlines::before,
+.vlines::before {
+  left: -5px;
+}
+
+@keyframes kiko {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
+}
+.stroke-txt {
+  color: inherit;
+  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+  font-weight: bold;
+}
+#gameOver {
+  position: absolute;
+  /* width: 500px;
+    height: 300px; */
+  z-index: 2000;
+  background-color: rgba(255, 255, 255, 0.9);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  /* font-size: 4em; */
+  font-weight: bold;
+  /* transition-property: font-size; */
+  /* transition-delay: 5s; */
+  transition: all 0.4s ease-out;
+
+  /* display: none; */
+}
+.old {
+  width: 0;
+  height: 0;
+  font-size: 0;
+}
+.transform {
+  width: 500px;
+  height: 300px;
+  font-size: 4em;
+  box-shadow: 1px 3px 8px 3px rgba(0, 0, 0, 0.3);
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
