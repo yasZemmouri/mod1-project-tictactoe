@@ -36,13 +36,15 @@ class Game {
     this.boardSituation = boardSituation;
     this.casesLeftIndexes = this.casesLeftIndexes;
   }
+  player1move = function () {
+    this.textContent = "m";
+    console.log(this);
+    console.log("c0");
+  };
   //randomely select which player moves first
   playerToStart = function () {
     this.turn = Math.floor(Math.random() * 2 + 1);
     console.log(`Player ${this.turn} goes first`);
-  };
-  player1move = function () {
-    console.log("c0");
   };
 }
 
@@ -63,3 +65,11 @@ game.playerToStart();
 
 startEl.addEventListener("click", game.start, false);
 c0El.addEventListener("click", game.player1move, false);
+c1El.addEventListener("click", game.player1move, false);
+c2El.addEventListener("click", game.player1move, false);
+c3El.addEventListener("click", game.player1move, false);
+c4El.addEventListener("click", game.player1move, false);
+c5El.addEventListener("click", game.player1move, false);
+c6El.addEventListener("click", game.player1move, false);
+c7El.addEventListener("click", game.player1move, false);
+c8El.addEventListener("click", game.player1move, false);
