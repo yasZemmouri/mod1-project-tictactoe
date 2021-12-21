@@ -121,3 +121,9 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
 }
+
+select {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
