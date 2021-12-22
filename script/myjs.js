@@ -49,8 +49,38 @@ class Game {
     this.casesLeft = casesLeft;
     this.turn = turn;
     this.boardSituation = boardSituation;
-    this.casesLeftIndexes = this.casesLeftIndexes;
+    this.casesLeftIndexes = casesLeftIndexes;
     // this.player1move = this.player1move.bind(this);
+    this.updateBoard = function (caseIndex) {
+      self.boardSituation[caseIndex] = self.turn;
+      console.log("board updated");
+      //tester
+      let myvar = "";
+      for (let i = 0; i < 9; i++) {
+        myvar = myvar + " " + boardSituation[i];
+      }
+      console.log("boardSituation: " + myvar);
+    };
+    //should be used on player 1 too??
+    this.updatecasesLeftIndexes = function (caseIndex) {
+      //Precondition: takes caseIndex as number between 0 and 8
+      //looks for caseIndex amongs emtyCaseTracker elements
+      //if it finds return it's index.s
+      let m = self.casesLeftIndexes.indexOf(caseIndex);
+      //swap
+      [self.casesLeftIndexes[m], self.casesLeftIndexes[casesLeft - 1]] = [
+        self.casesLeftIndexes[casesLeft - 1],
+        [self.casesLeftIndexes[m]],
+      ];
+      self.casesLeftIndexes.pop();
+      //test swap
+      let myvar = "";
+      for (let i = 0; i < self.casesLeftIndexes.length; i++) {
+        myvar = myvar + " " + self.casesLeftIndexes[i];
+      }
+      console.log("casesLeftIndexes: " + myvar);
+    };
+
     this.player1move = function () {
       if (self.turn === 1 && this.textContent === "") {
         this.textContent = "M";
@@ -60,8 +90,8 @@ class Game {
         // console.log("player1move says self is: " + self);
         // console.log(`player1move self: ${self.turn}`);
         //--------------------------------------------------------------
-        //updateBoard(caseIndex);//before changing the turn
-        //updatecasesLeftIndexes(caseIndex);
+        self.updateBoard(caseIndex); //before changing the turn
+        self.updatecasesLeftIndexes(caseIndex);
         self.turn = 2;
         //checkWin() || checkFullBoard(); //change turn to 0 if board full. should be after turn change
         //self.player2move();
