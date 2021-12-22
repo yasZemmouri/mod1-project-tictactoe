@@ -80,6 +80,53 @@ class Game {
       }
       console.log("casesLeftIndexes: " + myvar);
     };
+    self.checkWin = function () {
+      console.log("checkWin says Hello!");
+      let winner = 3 - self.turn; //since turns are inversed before making the call. we inverse them back
+      if (
+        (self.boardSituation[0] === winner &&
+          self.boardSituation[1] === winner &&
+          self.boardSituation[2] === winner) ||
+        (self.boardSituation[0] === winner &&
+          self.boardSituation[3] === winner &&
+          self.boardSituation[6] === winner) ||
+        (self.boardSituation[0] === winner &&
+          self.boardSituation[4] === winner &&
+          self.boardSituation[8] === winner) ||
+        (self.boardSituation[1] === winner &&
+          self.boardSituation[4] === winner &&
+          self.boardSituation[7] === winner) ||
+        (self.boardSituation[2] === winner &&
+          self.boardSituation[5] === winner &&
+          self.boardSituation[8] === winner) ||
+        (self.boardSituation[2] === winner &&
+          self.boardSituation[4] === winner &&
+          self.boardSituation[6] === winner) ||
+        (self.boardSituation[3] === winner &&
+          self.boardSituation[4] === winner &&
+          self.boardSituation[5] === winner) ||
+        (self.boardSituation[6] === winner &&
+          self.boardSituation[7] === winner &&
+          self.boardSituation[8] === winner)
+      ) {
+        console.log("checkWinner stopped the game");
+        if (winner === 2) {
+          //maybe I should have one gameOver and call it once.
+          console.log("You Lose");
+          console.log("checkWinner called gameOver");
+          gameOver(winner);
+          return true;
+        } else if (winner === 1) {
+          console.log("You Win");
+          console.log("checkWinner called gameOver");
+          gameOver(winner);
+          return true;
+        }
+      } else {
+        console.log("No Winner");
+        return false;
+      }
+    };
 
     this.player1move = function () {
       if (self.turn === 1 && this.textContent === "") {
@@ -93,7 +140,7 @@ class Game {
         self.updateBoard(caseIndex); //before changing the turn
         self.updatecasesLeftIndexes(caseIndex);
         self.turn = 2;
-        //checkWin() || checkFullBoard(); //change turn to 0 if board full. should be after turn change
+        self.checkWin(); //|| checkFullBoard(); //change turn to 0 if board full. should be after turn change
         //self.player2move();
       }
     };
@@ -111,6 +158,7 @@ class Game {
 
 const game1 = new Game();
 console.log("game1 " + game1.greating());
+
 // game1.playerToStart();
 const game2 = new Game();
 // game2.playerToStart();
