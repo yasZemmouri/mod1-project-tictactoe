@@ -141,7 +141,33 @@ class Game {
         self.updatecasesLeftIndexes(caseIndex);
         self.turn = 2;
         self.checkWin(); //|| checkFullBoard(); //change turn to 0 if board full. should be after turn change
-        //self.player2move();
+        self.player2move();
+      }
+    };
+    this.player2move = function () {
+      if (self.turn === 2) {
+        let caseIndex = null;
+        console.log("player 2 thinking");
+        // if (level === 1) {
+        //   caseIndex = level1();
+        // } else if (level === 2) {
+        //   caseIndex = level2();
+        // } else if (level === 3) {
+        //   caseIndex = level3();
+        // }
+        setTimeout(function () {
+          console.log("player 2 moved");
+          self.updateBoard(caseIndex); //before changing turn
+          self.updatecasesLeftIndexes(caseIndex);
+          caseEl[caseIndex].classList.add("stroke-txt");
+          caseEl[caseIndex].textContent = "O";
+          // turn = 0;//didn't work why??/
+          turn = 1;
+          self.checkWin(); // || checkFullBoard(); //must be executed after turn = 1; or we can use a condition. or maybe turn = check@in()||checkFullBoard()
+        }, 600); //doesn't stop player 1 from playing
+
+        //why not use turn 0 to stop player1 from playing somehow
+        // // gameOver();
       }
     };
   }
@@ -161,6 +187,7 @@ console.log("game1 " + game1.greating());
 
 // game1.playerToStart();
 const game2 = new Game();
+console.log("game2 " + game2.greating());
 // game2.playerToStart();
 // jeu.playerToStart();
 
