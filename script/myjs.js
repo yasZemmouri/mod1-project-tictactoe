@@ -2,16 +2,29 @@
 
 // const cases = Array.from(document.querySelectorAll(".case"));
 //Access Elements
-const caseEl = document.getElementsByClassName("case");
-const c0El = caseEl[0];
-const c1El = caseEl[1];
-const c2El = caseEl[2];
-const c3El = caseEl[3];
-const c4El = caseEl[4];
-const c5El = caseEl[5];
-const c6El = caseEl[6];
-const c7El = caseEl[7];
-const c8El = caseEl[8];
+const caseOneEl = document.getElementsByClassName("caseOne");
+console.log(caseOneEl);
+const cOne0El = caseOneEl[0];
+const cOne1El = caseOneEl[1];
+const cOne2El = caseOneEl[2];
+const cOne3El = caseOneEl[3];
+const cOne4El = caseOneEl[4];
+const cOne5El = caseOneEl[5];
+const cOne6El = caseOneEl[6];
+const cOne7El = caseOneEl[7];
+const cOne8El = caseOneEl[8];
+cOne1El.textContent = "O";
+console.log(cOne8El);
+const caseTwoEl = document.getElementsByClassName("caseTwo");
+const cTwo0El = caseTwoEl[0];
+const cTwo1El = caseTwoEl[1];
+const cTwo2El = caseTwoEl[2];
+const cTwo3El = caseTwoEl[3];
+const cTwo4El = caseTwoEl[4];
+const cTwo5El = caseTwoEl[5];
+const cTwo6El = caseTwoEl[6];
+const cTwo7El = caseTwoEl[7];
+const cTwo8El = caseTwoEl[8];
 
 const startEl = document.getElementById("start");
 
@@ -48,8 +61,10 @@ class Game {
   };
 }
 
-const game = new Game();
-game.playerToStart();
+const game1 = new Game();
+game1.playerToStart();
+const game2 = new Game();
+// game2.playerToStart();
 // jeu.playerToStart();
 
 // const game = {
@@ -63,13 +78,28 @@ game.playerToStart();
 //   boardSituation: new Array(9).fill(0),
 // };
 
-startEl.addEventListener("click", game.start, false);
-c0El.addEventListener("click", game.player1move, false);
-c1El.addEventListener("click", game.player1move, false);
-c2El.addEventListener("click", game.player1move, false);
-c3El.addEventListener("click", game.player1move, false);
-c4El.addEventListener("click", game.player1move, false);
-c5El.addEventListener("click", game.player1move, false);
-c6El.addEventListener("click", game.player1move, false);
-c7El.addEventListener("click", game.player1move, false);
-c8El.addEventListener("click", game.player1move, false);
+startEl.addEventListener("click", game1.start, false);
+// bord1 event listners
+cOne0El.addEventListener("click", game1.player1move, false);
+cOne1El.addEventListener("click", game1.player1move, false);
+cOne2El.addEventListener("click", game1.player1move, false);
+cOne3El.addEventListener("click", game1.player1move, false);
+cOne4El.addEventListener("click", game1.player1move, false);
+cOne5El.addEventListener("click", game1.player1move, false);
+cOne6El.addEventListener("click", game1.player1move, false);
+cOne7El.addEventListener("click", game1.player1move, false);
+cOne8El.addEventListener("click", game1.player1move, false);
+cOne0El.addEventListener("click", function () {
+  cOne0El.style.backgroundColor = "red";
+});
+console.log(cOne0El);
+// board2 event listners
+cTwo0El.addEventListener("click", game2.player1move, false);
+cTwo1El.addEventListener("click", game2.player1move, false);
+cTwo2El.addEventListener("click", game2.player1move, false);
+cTwo3El.addEventListener("click", game2.player1move, false);
+cTwo4El.addEventListener("click", game2.player1move, false);
+cTwo5El.addEventListener("click", game2.player1move, false);
+cTwo6El.addEventListener("click", game2.player1move, false);
+cTwo7El.addEventListener("click", game2.player1move, false);
+cTwo8El.addEventListener("click", game2.player1move, false);

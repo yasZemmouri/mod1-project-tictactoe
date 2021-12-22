@@ -6,7 +6,8 @@ body {
   align-items: center;
   height: 100vh;
 }
-.container {
+.container1,
+.container2 {
   width: 450px;
   margin: auto;
   height: 450px;
@@ -15,7 +16,8 @@ body {
   position: relative;
 }
 
-.case {
+.caseOne,
+.caseTwo {
   float: left;
   width: 150px;
   height: 150px;
