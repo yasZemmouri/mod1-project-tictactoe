@@ -3,7 +3,7 @@
 // const cases = Array.from(document.querySelectorAll(".case"));
 //Access Elements
 const caseOneEl = document.getElementsByClassName("caseOne");
-console.log(caseOneEl);
+// console.log(caseOneEl);
 const cOne0El = caseOneEl[0];
 const cOne1El = caseOneEl[1];
 const cOne2El = caseOneEl[2];
@@ -14,7 +14,7 @@ const cOne6El = caseOneEl[6];
 const cOne7El = caseOneEl[7];
 const cOne8El = caseOneEl[8];
 cOne1El.textContent = "O";
-console.log(cOne8El);
+// console.log(cOne8El);
 const caseTwoEl = document.getElementsByClassName("caseTwo");
 const cTwo0El = caseTwoEl[0];
 const cTwo1El = caseTwoEl[1];
@@ -37,32 +37,51 @@ class Player {
 class Game {
   constructor(
     //global Variables
+
     casesLeft = 9,
-    turn = 0,
+    turn = 1,
     //boardSituation
     boardSituation = new Array(9).fill(0),
     //List of Empty Cases
     casesLeftIndexes = [0, 1, 2, 3, 4, 5, 6, 7, 8]
   ) {
+    let self = this;
     this.casesLeft = casesLeft;
     this.turn = turn;
     this.boardSituation = boardSituation;
     this.casesLeftIndexes = this.casesLeftIndexes;
+    // this.player1move = this.player1move.bind(this);
+    this.player1move = function () {
+      if (self.turn === 1 && this.textContent === "") {
+        this.textContent = "M";
+        let caseIndex = parseInt(this.id[1]);
+        // console.log("caseIndex is: " + caseIndex);
+        console.log("player 1 moved");
+        // console.log("player1move says self is: " + self);
+        // console.log(`player1move self: ${self.turn}`);
+        //--------------------------------------------------------------
+        //updateBoard(caseIndex);//before changing the turn
+        //updatecasesLeftIndexes(caseIndex);
+        self.turn = 2;
+        //checkWin() || checkFullBoard(); //change turn to 0 if board full. should be after turn change
+        //self.player2move();
+      }
+    };
   }
-  player1move = function () {
-    this.textContent = "m";
-    console.log(this);
-    console.log("c0");
-  };
+  greating() {
+    return "is initialized!";
+  }
+
   //randomely select which player moves first
-  playerToStart = function () {
-    this.turn = Math.floor(Math.random() * 2 + 1);
-    console.log(`Player ${this.turn} goes first`);
-  };
+  // playerToStart = function () {
+  //   this.turn = Math.floor(Math.random() * 2 + 1);
+  //   console.log(`Player ${this.turn} goes first`);
+  // };
 }
 
 const game1 = new Game();
-game1.playerToStart();
+console.log("game1 " + game1.greating());
+// game1.playerToStart();
 const game2 = new Game();
 // game2.playerToStart();
 // jeu.playerToStart();
@@ -92,7 +111,7 @@ cOne8El.addEventListener("click", game1.player1move, false);
 cOne0El.addEventListener("click", function () {
   cOne0El.style.backgroundColor = "red";
 });
-console.log(cOne0El);
+// console.log(cOne0El);
 // board2 event listners
 cTwo0El.addEventListener("click", game2.player1move, false);
 cTwo1El.addEventListener("click", game2.player1move, false);
