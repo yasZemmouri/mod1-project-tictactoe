@@ -1,5 +1,9 @@
 * {
   margin: 0;
+  box-sizing: inherit;
+}
+html {
+  box-sizing: border-box;
 }
 nav {
   background-color: aqua;
@@ -8,13 +12,13 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
 }
 #container1,
 #container2 {
-  width: 450px;
+  width: 390px;
   margin: auto;
-  height: 450px;
+  height: 390px;
   /* background-color: red; */
   /* overflow: hidden; */
   position: relative;
@@ -23,9 +27,9 @@ nav {
 .case,
 .case {
   float: left;
-  width: 150px;
-  height: 150px;
-  line-height: 150px;
+  width: 130px;
+  height: 130px;
+  line-height: 130px;
   font-size: 5rem;
   text-align: center;
   user-select: none;
@@ -36,11 +40,11 @@ nav {
 
 .vlines,
 .hlines {
-  width: 150px;
+  width: 130px;
   height: 100%;
   position: absolute;
   /* background-color: rosybrown; */
-  left: 150px;
+  left: 130px;
 }
 
 .hlines {
@@ -132,4 +136,57 @@ select {
   border: none;
   outline: none;
   cursor: pointer;
+}
+.x {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background-color: transparent;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.x::before,
+.x::after {
+  content: "";
+  width: 0px;
+  height: 12px;
+  display: block;
+  background-color: blue;
+  border-radius: 90px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: top left;
+  /* transform: rotate(45deg); */
+}
+
+.x::after {
+  transform: rotate(45deg) translate(-50%, -50%);
+  animation: ex 0.4s forwards;
+}
+.x::before {
+  transform: rotate(-45deg) translate(-50%, -50%);
+  animation: ex 0.4s forwards;
+}
+
+.o {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 12px solid rgba(0, 0, 255);
+  border-radius: 90%;
+}
+
+@keyframes ex {
+  from {
+    width: 0;
+  }
+  to {
+    width: 80px;
+  }
 }

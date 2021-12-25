@@ -3,7 +3,6 @@
 //throw error???
 //=================Reference Elements=============================
 //Cases Elements
-//Do i really need to put id on every case in html???
 const caseEl = Array.from(
   document.querySelectorAll(`#container1
  .case`)
@@ -13,7 +12,8 @@ const gameOverEl = document.getElementById("gameOver");
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //========================== Function Declarations =======================//
 const player1move = function () {
-  this.textContent = "X";
+  //   this.textContent = "X";
+  this.querySelector("div").classList.add("x");
 };
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //==========================Event Listners=============================
