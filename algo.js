@@ -10,6 +10,8 @@ const caseEl = Array.from(
 const pEl = document.getElementsByTagName("p");
 const gameOverEl = document.getElementById("gameOver");
 const resetEl = document.getElementById("reset");
+const dlFirstEl = document.querySelector("dl:first-child");
+const dlLastEl = document.querySelector("dl:last-child");
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //========================= Global Variables ============================
 let turn = 1;
@@ -24,13 +26,24 @@ const player1move = function () {
   //   this.textContent = "X";
   if (turn === 1 && !this.querySelector("div").hasAttribute("class")) {
     this.querySelector("div").classList.add("x");
-    turn = 2;
+    turn = 0;
+    setTimeout(function () {
+      //use classes and a function with toggle. the 1st move border is not with this function.
+      dlLastEl.style.borderLeftColor = "orangered";
+      dlFirstEl.style.borderLeftColor = "transparent";
+      turn = 2;
+    }, 500);
   }
 };
 const player2move = function () {
   if (turn === 2 && !this.querySelector("div").hasAttribute("class")) {
     this.querySelector("div").classList.add("o");
-    turn = 1;
+    turn = 0;
+    setTimeout(function () {
+      dlLastEl.style.borderLeftColor = "transparent";
+      dlFirstEl.style.borderLeftColor = "blue";
+      turn = 1;
+    }, 500);
   }
 };
 
