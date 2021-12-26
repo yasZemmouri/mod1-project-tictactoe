@@ -35,7 +35,8 @@ nav {
   user-select: none;
   position: relative;
   z-index: 1000;
-  background-color: transparent;
+  /* background-color: rgb(13, 0, 138); */
+  overflow: hidden;
 }
 
 .vlines,
@@ -164,11 +165,11 @@ select {
 
 .x::after {
   transform: rotate(45deg) translate(-50%, -50%);
-  animation: ex 0.4s forwards;
+  animation: ex 0.3s forwards;
 }
 .x::before {
   transform: rotate(-45deg) translate(-50%, -50%);
-  animation: ex 0.4s forwards;
+  animation: ex 0.3s forwards;
 }
 
 .o {
@@ -178,15 +179,53 @@ select {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 12px solid rgba(0, 0, 255);
-  border-radius: 90%;
+  border: 12px solid rgb(0, 0, 255);
+  border-radius: 50%;
+  /* box-shadow: 38px -38px 0 12px rgba(0, 138, 0, 0.5),
+    -38px -38px 0 12px rgba(0, 138, 0, 0.5),
+    -38px 38px 0 12px rgba(0, 138, 0, 0.5),
+    38px 38px 0 12px rgba(0, 138, 0, 0.5), 0 0 0 12px rgba(0, 138, 0, 0.5); */
+  animation: ex 0.3s ease forwards;
 }
 
 @keyframes ex {
   from {
     width: 0;
+    height: 0;
   }
   to {
     width: 80px;
   }
 }
+/* @keyframes border {
+  0% {
+    box-shadow: 38px -38px 0 12px rgba(0, 138, 0, 0.5),
+      -38px -38px 0 12px rgba(0, 138, 0, 0.5),
+      -38px 38px 0 12px rgba(0, 138, 0, 0.5),
+      38px 38px 0 12px rgba(0, 138, 0, 0.5), 0 0 0 12px rgba(0, 138, 0, 0.5);
+  }
+  25% {
+    box-shadow: 0px -80px 0 12px rgba(0, 138, 0, 0.5),
+      -38px -38px 0 12px rgba(0, 138, 0, 0.5),
+      -38px 38px 0 12px rgba(0, 138, 0, 0.5),
+      38px 38px 0 12px rgba(0, 138, 0, 0.5), 0 0 0 12px red;
+  }
+  50% {
+    box-shadow: 0px -80px 0 12px rgba(0, 138, 0, 0.5),
+      -80px 0px 0 12px rgba(0, 138, 0, 0.5),
+      -38px 38px 0 12px rgba(0, 138, 0, 0.5),
+      38px 38px 0 12px rgba(0, 138, 0, 0.5), 0 0 0 12px blue;
+  }
+  75% {
+    box-shadow: 0px -80px 0 12px rgba(0, 138, 0, 0.5),
+      -80px 0px 0 12px rgba(0, 138, 0, 0.5),
+      -0px 80px 0 12px rgba(0, 138, 0, 0.5),
+      38px 38px 0 12px rgba(0, 138, 0, 0.5), 0 0 0 12px blue;
+  }
+  100% {
+    box-shadow: 0px -80px 0 12px rgba(0, 138, 0, 0.5),
+      -80px 0px 0 12px rgba(0, 138, 0, 0.5),
+      0px 80px 0 12px rgba(0, 138, 0, 0.5),
+      76px 25px 0 12px rgba(0, 138, 0, 0.5), 0 0 0 12px blue;
+  }
+} */
