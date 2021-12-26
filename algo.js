@@ -9,7 +9,7 @@ const caseEl = Array.from(
 );
 const pEl = document.getElementsByTagName("p");
 const gameOverEl = document.getElementById("gameOver");
-const startEl = document.getElementById("start");
+const resetEl = document.getElementById("reset");
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //========================= Global Variables ============================
 let turn = 1;
@@ -57,7 +57,7 @@ caseEl[5].addEventListener("click", player2move);
 caseEl[6].addEventListener("click", player2move);
 caseEl[7].addEventListener("click", player2move);
 caseEl[8].addEventListener("click", player2move);
-startEl.addEventListener("click", reset);
+resetEl.addEventListener("click", reset);
 
 // //ways to declare array
 // //ways to declare functions
