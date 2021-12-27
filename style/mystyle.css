@@ -151,7 +151,7 @@ select {
 .x::before,
 .x::after {
   content: "";
-  width: 0px;
+  width: 80px;
   height: 12px;
   display: block;
   background-color: blue;
