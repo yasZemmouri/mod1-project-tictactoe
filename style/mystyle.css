@@ -5,6 +5,10 @@
 html {
   box-sizing: border-box;
 }
+body {
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+}
 nav {
   background-color: aqua;
 }
@@ -12,13 +16,13 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 70vh;
 }
 #container1,
 #container2 {
-  width: 390px;
+  width: 360px;
   margin: auto;
-  height: 390px;
+  height: 360px;
   /* background-color: red; */
   /* overflow: hidden; */
   position: relative;
@@ -27,25 +31,29 @@ nav {
 .case,
 .case {
   float: left;
-  width: 130px;
-  height: 130px;
-  line-height: 130px;
+  width: 120px;
+  height: 120px;
+  line-height: 120px;
   font-size: 5rem;
-  text-align: center;
+  /* text-align: center; */
   user-select: none;
   position: relative;
-  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* I dont like this */
+  /* z-index: 1000; */
   /* background-color: rgb(13, 0, 138); */
   overflow: hidden;
 }
 
 .vlines,
 .hlines {
-  width: 130px;
+  width: 120px;
   height: 100%;
   position: absolute;
   /* background-color: rosybrown; */
-  left: 130px;
+  left: 120px;
 }
 
 .hlines {
@@ -60,7 +68,7 @@ nav {
   width: 10px;
   height: 0;
   position: absolute;
-  z-index: 500;
+  /* z-index: 500; */
   background-color: #663399;
   border-radius: 100px;
   animation: kiko 1.5s ease-out;
@@ -96,8 +104,8 @@ nav {
   position: absolute;
   /* width: 500px;
     height: 300px; */
-  z-index: 2000;
-  background-color: rgba(255, 255, 255, 0.9);
+  /* z-index: 2000; */
+  background-color: rgba(255, 255, 255, 0.85);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -120,7 +128,7 @@ nav {
   height: 0;
   font-size: 0;
 }
-.transform {
+.gameOver-screen {
   width: 500px;
   height: 300px;
   font-size: 4em;
@@ -139,19 +147,21 @@ select {
   cursor: pointer;
 }
 .x {
-  position: absolute;
-  width: 90px;
-  height: 90px;
+  /* position: absolute; */
+  position: relative;
+  width: 80px;
+  height: 80px;
   background-color: transparent;
-  top: 50%;
+  /* top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
+  animation: ex 0.3s forwards;
 }
 
 .x::before,
 .x::after {
   content: "";
-  width: 80px;
+  width: 70px;
   height: 12px;
   display: block;
   background-color: blue;
@@ -165,20 +175,21 @@ select {
 
 .x::after {
   transform: rotate(45deg) translate(-50%, -50%);
-  animation: ex 0.3s forwards;
+  /* animation: ex 0.3s forwards; */
 }
 .x::before {
   transform: rotate(-45deg) translate(-50%, -50%);
-  animation: ex 0.3s forwards;
+  /* animation: ex 0.3s forwards; */
 }
 
 .o {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  top: 50%;
+  position: relative;
+  width: 70px;
+  height: 70px;
+  scale: 0;
+  /* top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   border: 12px solid orangered;
   border-radius: 50%;
   /* box-shadow: 38px -38px 0 12px rgba(0, 138, 0, 0.5),
@@ -190,11 +201,13 @@ select {
 
 @keyframes ex {
   from {
-    width: 0;
-    height: 0;
+    /* width: 0;
+    height: 0; */
+    transform: scale(0);
   }
   to {
-    width: 80px;
+    /* width: 70px; */
+    transform: scale(1);
   }
 }
 /* @keyframes border {
@@ -230,10 +243,10 @@ select {
   }
 } */
 footer {
-  /* background-color: yellow; */
-  /* height: 100px; */
-  position: relative;
-  text-align: center;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  padding-bottom: 5px;
 }
 dl {
   display: inline-block;
@@ -245,9 +258,11 @@ dl {
 }
 dl:first-child {
   border-left: 6px solid transparent;
+  border-radius: 5px;
 }
 dl:last-child {
   border-left: 6px solid transparent;
+  border-radius: 5px;
 }
 
 dt,
@@ -303,4 +318,27 @@ dd {
 #o-score,
 #x-score {
   width: 70px;
+}
+
+#reset {
+  display: none;
+  position: absolute;
+  /* z-index: 2000; */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: rgba(255, 0, 0, 0.3); */
+}
+p {
+  /* visibility: hidden; */
+  display: inline-block;
+  position: relative;
+  top: -80px;
+  font-size: 1.5rem;
+  transition: top 0.6s;
+  transition-delay: 0.1s;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  box-shadow: 1px 3px 8px 3px rgba(0, 0, 0, 0.2);
 }

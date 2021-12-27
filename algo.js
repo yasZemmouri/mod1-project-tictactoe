@@ -14,10 +14,14 @@ const dlFirstEl = document.querySelector("dl:first-child");
 const dlLastEl = document.querySelector("dl:last-child");
 const xScoreEl = document.getElementById("x-score");
 const oScoreEl = document.getElementById("o-score");
+const fLineEl = document.getElementById("fLine");
+const lLineEl = document.getElementById("lLine");
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //========================= Global Variables ============================
 let turn = 1;
 const boardSituation = new Array(9).fill(0);
+//number of empty cases. used by checkFullBoard()
+let casesLeft = 9;
 let xScore = 0,
   oScore = 0;
 // const casesLeftIndexes = [0, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -28,8 +32,19 @@ const reset = function () {
     caseEl[i].querySelector("div").removeAttribute("class");
     //Reset board Array
     boardSituation[i] = 0;
-    // console.log("remove");
+    //reset reset
+    resetEl.style.display = "none";
+    //reset p
+    pEl[0].style.top = "-80px";
+    //reset cases left
+    casesLeft = 9;
   }
+  //reset game over
+  //use reverse effect on game over too
+  gameOverEl.removeAttribute("class");
+  fLineEl.removeAttribute("class");
+  lLineEl.textContent = "";
+
   console.log("game reseted");
 };
 
@@ -44,47 +59,47 @@ const updateBoard = function (player, caseIndex) {
   console.log("boardSituation: " + myvar);
 };
 
-const checkWin = function (player) {
+const checkWin = function (winner) {
   // let winner = 3 - turn; //since turns are inversed before making the call. we inverse them back
   if (
-    (boardSituation[0] === player &&
-      boardSituation[1] === player &&
-      boardSituation[2] === player) ||
-    (boardSituation[0] === player &&
-      boardSituation[3] === player &&
-      boardSituation[6] === player) ||
-    (boardSituation[0] === player &&
-      boardSituation[4] === player &&
-      boardSituation[8] === player) ||
-    (boardSituation[1] === player &&
-      boardSituation[4] === player &&
-      boardSituation[7] === player) ||
-    (boardSituation[2] === player &&
-      boardSituation[5] === player &&
-      boardSituation[8] === player) ||
-    (boardSituation[2] === player &&
-      boardSituation[4] === player &&
-      boardSituation[6] === player) ||
-    (boardSituation[3] === player &&
-      boardSituation[4] === player &&
-      boardSituation[5] === player) ||
-    (boardSituation[6] === player &&
-      boardSituation[7] === player &&
-      boardSituation[8] === player)
+    (boardSituation[0] === winner &&
+      boardSituation[1] === winner &&
+      boardSituation[2] === winner) ||
+    (boardSituation[0] === winner &&
+      boardSituation[3] === winner &&
+      boardSituation[6] === winner) ||
+    (boardSituation[0] === winner &&
+      boardSituation[4] === winner &&
+      boardSituation[8] === winner) ||
+    (boardSituation[1] === winner &&
+      boardSituation[4] === winner &&
+      boardSituation[7] === winner) ||
+    (boardSituation[2] === winner &&
+      boardSituation[5] === winner &&
+      boardSituation[8] === winner) ||
+    (boardSituation[2] === winner &&
+      boardSituation[4] === winner &&
+      boardSituation[6] === winner) ||
+    (boardSituation[3] === winner &&
+      boardSituation[4] === winner &&
+      boardSituation[5] === winner) ||
+    (boardSituation[6] === winner &&
+      boardSituation[7] === winner &&
+      boardSituation[8] === winner)
   ) {
     console.log("checkWinner stopped the game");
-    if (player === 1) {
+    if (winner === 1) {
       //maybe I should have one gameOver and call it once.
       console.log("You Win");
       xScoreEl.textContent = ++xScore;
       console.log("checkWinner called gameOver");
-      // gameOver(player);
+      gameOver(winner);
       return true;
-    } else if (player === 2) {
+    } else if (winner === 2) {
       console.log("You Lose");
       oScoreEl.textContent = ++oScore;
       console.log("checkWinner called gameOver");
-      // gameOver(player);
+      gameOver(winner);
       return true;
     }
   } else {
@@ -92,7 +107,58 @@ const checkWin = function (player) {
     return false;
   }
 };
-const gameOver = function () {};
+//decrement cases left
+//if no more cases left call game over.
+const checkFullBoard = function () {
+  console.log("checkFullBoard was called");
+  casesLeft--;
+  console.log("cases left: " + casesLeft); //test
+  if (casesLeft === 0) {
+    console.log("checkFullBoard stopped the game");
+    console.log("No more moves");
+    console.log("checkFullBoard called gameOver");
+    gameOver(casesLeft);
+  }
+};
+const gameOver = function (winner) {
+  console.log("game over says hi");
+  if (winner === 1) {
+    // pEl[0].querySelector("div").classList.add("x");
+    console.log("fLineEl: " + fLineEl);
+    fLineEl.classList.add("x");
+    lLineEl.textContent = "You win";
+  } else if (winner === 2) {
+    // pEl[0].querySelector("div").classList.add("o");
+    // pEl[1].textContent = "You lose";
+    // gameOverEl.classList.add("stroke-txt");
+    fLineEl.classList.add("o");
+    lLineEl.textContent = "You lose";
+  } else if (winner === 0) {
+    // how to change style for multiple elements at once???
+    //1st paragraph
+    // pEl[0].textContent = "X";
+    // let half0 = document.createElement("SPAN");
+    // half0.textContent = "O";
+    // half0.classList.add("stroke-txt");
+    // pEl[0].prepend(half0);
+    //second paragraph
+    // pEl[1].textContent = "Dr"; //give o and x different colors
+    // let half1 = document.createElement("SPAN");
+    // half1.textContent = "aw";
+    // half1.classList.add("stroke-txt");
+    // pEl[1].appendChild(half1);
+    fLineEl.classList.add("o");
+    fLineEl.classList.add("x");
+    lLineEl.textContent = "Draw";
+  }
+  console.log("turn at gameOve: " + turn);
+  turn = 0; //game stopped
+  // document.getElementById("gameOver").style.display = "flex";
+  gameOverEl.classList.add("gameOver-screen");
+  resetEl.style.display = "block";
+  // pEl[0].style.visibility = "visible";
+  pEl[0].style.top = "0";
+};
 const player1move = function () {
   //   this.textContent = "X";
   if (turn === 1 && !this.querySelector("div").hasAttribute("class")) {
@@ -105,7 +171,7 @@ const player1move = function () {
     //update board
     updateBoard(player, caseIndex);
     //check if Win
-    checkWin(player);
+    checkWin(player) || checkFullBoard();
 
     //can we make update board do the parseInt part???
     setTimeout(function () {
@@ -114,7 +180,7 @@ const player1move = function () {
       dlFirstEl.style.borderLeftColor = "transparent";
 
       turn = 2;
-    }, 400);
+    }, 350);
   }
 };
 const player2move = function () {
@@ -129,7 +195,7 @@ const player2move = function () {
     //update board
     updateBoard(player, caseIndex);
     //check if Win
-    checkWin(player);
+    checkWin(player) || checkFullBoard();
 
     //can we make update board do the parseInt part???
     setTimeout(function () {
@@ -138,7 +204,7 @@ const player2move = function () {
       dlFirstEl.style.borderLeftColor = "blue";
 
       turn = 1;
-    }, 400);
+    }, 350);
   }
 };
 
