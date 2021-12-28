@@ -86,7 +86,7 @@ class Game {
       console.log("boardSituation: " + myvar);
     };
     //should be used on player 1 too??
-    this.updatecasesLeftIndexes = function (caseIndex) {
+    this.updateCasesLeftIndexes = function (caseIndex) {
       //Precondition: takes caseIndex as number between 0 and 8
       //looks for caseIndex amongs emtyCaseTracker elements
       //if it finds return it's index.s
@@ -172,7 +172,7 @@ class Game {
         // console.log(`player1move self: ${self.turn}`);
         //--------------------------------------------------------------
         self.updateBoard(caseIndex); //before changing the turn
-        self.updatecasesLeftIndexes(caseIndex);
+        self.updateCasesLeftIndexes(caseIndex);
         self.turn = 2; //removed for testing reasons
         self.checkWin(); //|| checkFullBoard(); //change turn to 0 if board full. should be after turn change
         self.player2move();
@@ -206,7 +206,7 @@ class Game {
           let caseIndex = self.casesLeftIndexes[caseRandom];
           console.log("player 2 moved");
           self.updateBoard(caseIndex); //before changing turn
-          self.updatecasesLeftIndexes(caseIndex);
+          self.updateCasesLeftIndexes(caseIndex);
           caseEl[caseIndex].classList.add("stroke-txt");
           caseEl[caseIndex].textContent = "O";
           // turn = 0;//didn't work why??/

@@ -17,9 +17,9 @@ const oScoreEl = document.getElementById("o-score");
 const fLineEl = document.getElementById("fLine");
 const lLineEl = document.getElementById("lLine");
 const selectLevelEl = document.getElementById("select-level");
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //========================= Global Variables ============================
 let turn = 1;
+let gamesCounter = 0;
 const boardSituation = new Array(9).fill(0);
 //number of empty cases. used by checkFullBoard()
 let casesLeft = 9;
@@ -34,6 +34,8 @@ const reset = function () {
     caseEl[i].querySelector("div").removeAttribute("class");
     //Reset board Array
     boardSituation[i] = 0;
+    //reset casesLeftIndexes
+    casesLeftIndexes[i] = i;
     //reset reset
     resetEl.style.display = "none";
     //reset p
@@ -47,8 +49,14 @@ const reset = function () {
   gameOverEl.classList.remove("gameOver-screen");
   fLineEl.removeAttribute("class");
   lLineEl.textContent = "";
+  //reset turn (alternate between 1 and 2)
+  turn = 1 + (gamesCounter % 2);
 
   console.log("game reseted");
+  setTimeout(function () {
+    console.log("reset calling compMove()");
+    compMove();
+  }, 400);
 };
 
 const updateBoard = function (player, caseIndex) {
@@ -60,6 +68,25 @@ const updateBoard = function (player, caseIndex) {
     myvar = myvar + " " + boardSituation[i];
   }
   console.log("boardSituation: " + myvar);
+};
+const updateCasesLeftIndexes = function (caseIndex) {
+  //Precondition: takes caseIndex as number between 0 and 8
+  //looks for caseIndex amongs caseIndexesLeft elements
+  //if it finds return it's index.
+
+  let m = casesLeftIndexes.indexOf(caseIndex);
+  //swap
+  [casesLeftIndexes[m], casesLeftIndexes[casesLeft - 1]] = [
+    casesLeftIndexes[casesLeft - 1],
+    [casesLeftIndexes[m]],
+  ];
+  casesLeftIndexes.pop();
+  //test swap
+  let myvar = "";
+  for (let i = 0; i < casesLeftIndexes.length; i++) {
+    myvar = myvar + " " + casesLeftIndexes[i];
+  }
+  console.log("casesLeftIndexes: " + myvar);
 };
 
 const checkWin = function (winner) {
@@ -98,7 +125,7 @@ const checkWin = function (winner) {
       console.log("checkWinner called gameOver");
       gameOver(winner);
       return true;
-    } else if (winner === 2) {
+    } else if (winner == 2) {
       console.log("You Lose");
       oScoreEl.textContent = ++oScore;
       console.log("checkWinner called gameOver");
@@ -121,13 +148,16 @@ const checkFullBoard = function () {
     console.log("No more moves");
     console.log("checkFullBoard called gameOver");
     gameOver(casesLeft);
-  }
+    return true;
+  } else return false;
 };
+
 const gameOver = function (winner) {
   console.log("game over says hi");
+  // turn = 0;
   if (winner === 1) {
     // pEl[0].querySelector("div").classList.add("x");
-    console.log("fLineEl: " + fLineEl);
+    // console.log("fLineEl: " + fLineEl);
     fLineEl.classList.add("x");
     lLineEl.textContent = "You win";
   } else if (winner === 2) {
@@ -154,8 +184,10 @@ const gameOver = function (winner) {
     fLineEl.classList.add("x");
     lLineEl.textContent = "Draw";
   }
+
   console.log("turn at gameOve: " + turn);
   turn = 0; //game stopped
+  gamesCounter++;
   // document.getElementById("gameOver").style.display = "flex";
   gameOverEl.classList.add("gameOver-screen");
   resetEl.style.display = "block";
@@ -173,15 +205,16 @@ const player1move = function () {
     let caseIndex = parseInt(clickedEl.id[1]);
     //update board
     updateBoard(player, caseIndex);
+    updateCasesLeftIndexes(caseIndex);
     //check if Win
-    checkWin(player) || checkFullBoard();
 
     //can we make update board do the parseInt part???
+    checkWin(player) || checkFullBoard() || (turn = 2);
     setTimeout(function () {
       //use classes and a function with toggle. the 1st move border is not with this function.
       dlLastEl.style.borderLeftColor = "orangered";
       dlFirstEl.style.borderLeftColor = "transparent";
-      turn = 2;
+      console.log("player1 calling compMove()");
       compMove();
     }, 350);
   }
@@ -219,7 +252,9 @@ const player2move = function () {
 //should I put the whole function inside settimeout???
 const compMove = function () {
   if (turn === 2 && level !== 0) {
-    let player = 3;
+    console.log("turn at computer: " + turn);
+    turn = 0; //why???
+    const player = 2;
     console.log("computer is thinking");
     console.log("level1 to play");
     let caseRandom = Math.floor(Math.random() * casesLeft);
@@ -227,6 +262,7 @@ const compMove = function () {
     let caseIndex = casesLeftIndexes[caseRandom];
     caseEl[caseIndex].querySelector("div").classList.add("o");
     //update casesLeftIndex
+    updateCasesLeftIndexes(caseIndex);
 
     updateBoard(player, caseIndex);
     //check if Win
@@ -268,6 +304,8 @@ resetEl.addEventListener("click", reset);
 selectLevelEl.addEventListener("change", function () {
   level = parseInt(selectLevelEl.value);
   console.log("Level: " + level);
+  console.log("level change calling compMove()");
+  compMove();
 });
 
 // why the function handling the event doens't have parenthecsis
