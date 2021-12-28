@@ -16,6 +16,7 @@ const xScoreEl = document.getElementById("x-score");
 const oScoreEl = document.getElementById("o-score");
 const fLineEl = document.getElementById("fLine");
 const lLineEl = document.getElementById("lLine");
+const selectLevelEl = document.getElementById("select-level");
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //========================= Global Variables ============================
 let turn = 1;
@@ -24,7 +25,8 @@ const boardSituation = new Array(9).fill(0);
 let casesLeft = 9;
 let xScore = 0,
   oScore = 0;
-// const casesLeftIndexes = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+let level = 0;
+const casesLeftIndexes = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 //========================== Function Declarations =======================//
 const reset = function () {
   for (let i = 0; i < 9; i++) {
@@ -179,25 +181,29 @@ const player1move = function () {
       //use classes and a function with toggle. the 1st move border is not with this function.
       dlLastEl.style.borderLeftColor = "orangered";
       dlFirstEl.style.borderLeftColor = "transparent";
-
       turn = 2;
+      compMove();
     }, 350);
   }
 };
 const player2move = function () {
   //   this.textContent = "X";
-  if (turn === 2 && !this.querySelector("div").hasAttribute("class")) {
+  if (
+    turn === 2 &&
+    level === 0 &&
+    !this.querySelector("div").hasAttribute("class")
+  ) {
     const player = 2;
     let clickedEl = this;
     //draw move
     clickedEl.querySelector("div").classList.add("o");
-    turn = 0;
+    //why is turn = 0???
+    // turn = 0;
     let caseIndex = parseInt(clickedEl.id[1]);
     //update board
     updateBoard(player, caseIndex);
     //check if Win
     checkWin(player) || checkFullBoard();
-
     //can we make update board do the parseInt part???
     setTimeout(function () {
       //use classes and a function with toggle. the 1st move border is not with this function.
@@ -208,7 +214,33 @@ const player2move = function () {
     }, 350);
   }
 };
+//activate only when its called by player1?
+//how can I make it go first??
+//should I put the whole function inside settimeout???
+const compMove = function () {
+  if (turn === 2 && level !== 0) {
+    let player = 3;
+    console.log("computer is thinking");
+    console.log("level1 to play");
+    let caseRandom = Math.floor(Math.random() * casesLeft);
+    console.log("level1 played random");
+    let caseIndex = casesLeftIndexes[caseRandom];
+    caseEl[caseIndex].querySelector("div").classList.add("o");
+    //update casesLeftIndex
 
+    updateBoard(player, caseIndex);
+    //check if Win
+    checkWin(player) || checkFullBoard();
+    //can we make update board do the parseInt part???
+    setTimeout(function () {
+      //use classes and a function with toggle. the 1st move border is not with this function.
+      dlLastEl.style.borderLeftColor = "transparent";
+      dlFirstEl.style.borderLeftColor = "blue";
+
+      turn = 1;
+    }, 350);
+  }
+};
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 //==========================Event Listners=============================
 //Click on cases Listners
@@ -233,6 +265,10 @@ caseEl[6].addEventListener("click", player2move);
 caseEl[7].addEventListener("click", player2move);
 caseEl[8].addEventListener("click", player2move);
 resetEl.addEventListener("click", reset);
+selectLevelEl.addEventListener("change", function () {
+  level = parseInt(selectLevelEl.value);
+  console.log("Level: " + level);
+});
 
 // why the function handling the event doens't have parenthecsis
 // how can we pass parameters to it??

@@ -71,8 +71,8 @@ nav {
   /* z-index: 500; */
   background-color: #663399;
   border-radius: 100px;
-  animation: kiko 1.5s ease-out;
-  animation-delay: 1.5s;
+  animation: kiko 1.2s ease-out;
+  animation-delay: 1.2s;
   animation-fill-mode: forwards;
 }
 
@@ -99,6 +99,19 @@ nav {
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
   font-weight: bold;
+}
+#level-container {
+  width: 150px;
+  margin: auto;
+}
+select {
+  /* margin: auto;
+  width: 150px; */
+  /* padding: 20px; */
+}
+option {
+  padding: 200px;
+  background-color: red;
 }
 #gameOver {
   position: absolute;
@@ -130,6 +143,7 @@ nav {
 }
 .gameOver-screen {
   width: 500px;
+  max-width: 100vw;
   height: 300px;
   font-size: 4em;
   box-shadow: 1px 3px 8px 3px rgba(0, 0, 0, 0.3);
