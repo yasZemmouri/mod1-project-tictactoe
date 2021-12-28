@@ -39,9 +39,10 @@ const reset = function () {
     //reset cases left
     casesLeft = 9;
   }
-  //reset game over
+
+  //reset gameOver screen
   //use reverse effect on game over too
-  gameOverEl.removeAttribute("class");
+  gameOverEl.classList.remove("gameOver-screen");
   fLineEl.removeAttribute("class");
   lLineEl.textContent = "";
 
