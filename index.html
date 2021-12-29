@@ -4,59 +4,64 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style/mystyle.css" />
-    <title>Mod1 Project</title>
+    <title>TicTacToe</title>
   </head>
   <body>
     <nav>
-      <a href="single.html">Single Board</a>
-      <a href="index.html">multiple boards</a>
+      <a href="index.html">Single Board</a>
+      <a href="multi.html">multiple boards</a>
     </nav>
-    <div>
-      <select name="level" id="">
-        <option value="0">Easy</option>
-        <option value="1">Medium</option>
-        <option value="2">Hard</option>
+    <p>Click anywhere to continue.</p>
+    <div id="level-container">
+      <select name="level" id="select-level">
+        <option value="0">PvsP</option>
+        <option value="1">Easy</option>
+        <option value="2">Medium</option>
+        <option value="3">Hard</option>
       </select>
     </div>
-    <!-- <button id="start">start</button> -->
+    <!-- <button id="reset">reset</button> -->
     <div id="game-container">
-      <!-- make the board smaller -->
       <div id="container1">
-        <div id="c0" class="case"></div>
-        <div id="c1" class="case"></div>
-        <div id="c2" class="case"></div>
-        <div id="c3" class="case"></div>
-        <div id="c4" class="case"></div>
-        <div id="c5" class="case"></div>
-        <div id="c6" class="case"></div>
-        <div id="c7" class="case"></div>
-        <div id="c8" class="case"></div>
         <div class="vlines"></div>
         <div class="hlines"></div>
+        <div id="c0" class="case"><div></div></div>
+        <div id="c1" class="case"><div></div></div>
+        <div id="c2" class="case"><div></div></div>
+        <div id="c3" class="case"><div></div></div>
+        <div id="c4" class="case"><div></div></div>
+        <div id="c5" class="case"><div></div></div>
+        <div id="c6" class="case"><div></div></div>
+        <div id="c7" class="case"><div></div></div>
+        <div id="c8" class="case"><div></div></div>
+        <!-- ------------------------------------------------------- -->
         <div id="gameOver" class="old">
-          <p></p>
-          <p></p>
+          <div>
+            <div id="fLine"></div>
+          </div>
+          <div id="lLine"></div>
         </div>
-      </div>
-      <div id="container2">
-        <div id="a0" class="case"></div>
-        <div id="a1" class="case"></div>
-        <div id="a2" class="case"></div>
-        <div id="a3" class="case"></div>
-        <div id="a4" class="case"></div>
-        <div id="a5" class="case"></div>
-        <div id="a6" class="case"></div>
-        <div id="a7" class="case"></div>
-        <div id="a8" class="case"></div>
-        <div class="vlines"></div>
-        <div class="hlines"></div>
-        <div id="gameOver" class="old">
-          <p></p>
-          <p></p>
-        </div>
+        <!-- ---------------------------------------------------- -->
       </div>
     </div>
-    <script src="script/myjs.js"></script>
+    <footer>
+      <dl>
+        <dt id="x-player"></dt>
+        <dd id="x-score">0</dd>
+      </dl>
+      <dl>
+        <dt id="o-player"></dt>
+        <dd id="o-score">0</dd>
+      </dl>
+    </footer>
+    <div id="reset"></div>
+    <script src="algo.js"></script>
   </body>
 </html>

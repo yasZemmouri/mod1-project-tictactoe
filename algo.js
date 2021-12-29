@@ -17,16 +17,20 @@ const oScoreEl = document.getElementById("o-score");
 const fLineEl = document.getElementById("fLine");
 const lLineEl = document.getElementById("lLine");
 const selectLevelEl = document.getElementById("select-level");
+
 //========================= Global Variables ============================
 let turn = 1;
+let player = turn; // I made it globale so I can use it inside checkCompliments to compare the winner
 let gamesCounter = 0;
 const boardSituation = new Array(9).fill(0);
 //number of empty cases. used by checkFullBoard()
+let caseIndex = -1; //made it globale because I needed checkCompliment to return true or false and change caseIndex at the same time.
 let casesLeft = 9;
 let xScore = 0,
   oScore = 0;
 let level = 0;
 const casesLeftIndexes = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
 //========================== Function Declarations =======================//
 const reset = function () {
   for (let i = 0; i < 9; i++) {
@@ -51,6 +55,8 @@ const reset = function () {
   lLineEl.textContent = "";
   //reset turn (alternate between 1 and 2)
   turn = 1 + (gamesCounter % 2);
+  //reset caseIndex
+  caseIndex = -1;
 
   console.log("game reseted");
   setTimeout(function () {
@@ -197,12 +203,12 @@ const gameOver = function (winner) {
 const player1move = function () {
   //   this.textContent = "X";
   if (turn === 1 && !this.querySelector("div").hasAttribute("class")) {
-    const player = 1;
+    player = 1;
     let clickedEl = this;
     //draw move
     clickedEl.querySelector("div").classList.add("x");
     turn = 0;
-    let caseIndex = parseInt(clickedEl.id[1]);
+    caseIndex = parseInt(clickedEl.id[1]);
     //update board
     updateBoard(player, caseIndex);
     updateCasesLeftIndexes(caseIndex);
@@ -226,14 +232,15 @@ const player2move = function () {
     level === 0 &&
     !this.querySelector("div").hasAttribute("class")
   ) {
+    player = turn;
     turn = 0; //to prevent player2 from clicking twice
-    const player = 2;
+    caseIndex = -1;
     let clickedEl = this;
     //draw move
     clickedEl.querySelector("div").classList.add("o");
     //why is turn = 0???
     // turn = 0;
-    let caseIndex = parseInt(clickedEl.id[1]);
+    caseIndex = parseInt(clickedEl.id[1]);
     //update board
     updateBoard(player, caseIndex);
     //check if Win
@@ -248,19 +255,303 @@ const player2move = function () {
     }, 350);
   }
 };
+const checkCompliments = function (playerNum) {
+  //think about a math formula
+  //========================================================================
+  //console.log(`playerNum: ${playerNum}`);
+  if (
+    boardSituation[0] === playerNum &&
+    boardSituation[1] === playerNum &&
+    boardSituation[2] === 0
+  ) {
+    caseIndex = 2;
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    return true;
+  } else if (
+    boardSituation[0] === playerNum &&
+    boardSituation[2] === playerNum &&
+    boardSituation[1] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 1;
+    return true;
+  } else if (
+    boardSituation[1] === playerNum &&
+    boardSituation[2] === playerNum &&
+    boardSituation[0] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 0;
+    return true;
+  }
+  //-------------------------------------------------------------------------
+  else if (
+    boardSituation[3] === playerNum &&
+    boardSituation[4] === playerNum &&
+    boardSituation[5] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 5;
+    return true;
+  } else if (
+    boardSituation[3] === playerNum &&
+    boardSituation[5] === playerNum &&
+    boardSituation[4] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 4;
+    return true;
+  } else if (
+    boardSituation[4] === playerNum &&
+    boardSituation[5] === playerNum &&
+    boardSituation[3] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 3;
+    return true;
+  }
+  //-------------------------------------------------------------------------
+  else if (
+    boardSituation[6] === playerNum &&
+    boardSituation[7] === playerNum &&
+    boardSituation[8] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 8;
+    return true;
+  } else if (
+    boardSituation[6] === playerNum &&
+    boardSituation[8] === playerNum &&
+    boardSituation[7] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 7;
+    return true;
+  } else if (
+    boardSituation[7] === playerNum &&
+    boardSituation[8] === playerNum &&
+    boardSituation[6] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 6;
+    return true;
+  }
+  //====================================================================================
+  else if (
+    boardSituation[0] === playerNum &&
+    boardSituation[3] === playerNum &&
+    boardSituation[6] === 0
+  ) {
+    caseIndex = 6;
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    return true;
+  } else if (
+    boardSituation[0] === playerNum &&
+    boardSituation[6] === playerNum &&
+    boardSituation[3] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 3;
+    return true;
+  } else if (
+    boardSituation[3] === playerNum &&
+    boardSituation[6] === playerNum &&
+    boardSituation[0] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 0;
+    return true;
+  }
+  //-------------------------------------------------------------------------
+  else if (
+    boardSituation[1] === playerNum &&
+    boardSituation[4] === playerNum &&
+    boardSituation[7] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 7;
+    return true;
+  } else if (
+    boardSituation[1] === playerNum &&
+    boardSituation[7] === playerNum &&
+    boardSituation[4] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 4;
+    return true;
+  } else if (
+    boardSituation[4] === playerNum &&
+    boardSituation[7] === playerNum &&
+    boardSituation[1] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 1;
+    return true;
+  }
+  //-------------------------------------------------------------------------
+  else if (
+    boardSituation[2] === playerNum &&
+    boardSituation[5] === playerNum &&
+    boardSituation[8] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 8;
+    return true;
+  } else if (
+    boardSituation[5] === playerNum &&
+    boardSituation[8] === playerNum &&
+    boardSituation[2] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 2;
+    return true;
+  } else if (
+    boardSituation[2] === playerNum &&
+    boardSituation[8] === playerNum &&
+    boardSituation[5] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 5;
+    return true;
+  }
+  //=============================================================
+  //-------------------------------------------------------------------------
+  else if (
+    boardSituation[0] === playerNum &&
+    boardSituation[4] === playerNum &&
+    boardSituation[8] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 8;
+    return true;
+  } else if (
+    boardSituation[0] === playerNum &&
+    boardSituation[8] === playerNum &&
+    boardSituation[4] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 4;
+    return true;
+  } else if (
+    boardSituation[4] === playerNum &&
+    boardSituation[8] === playerNum &&
+    boardSituation[0] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 0;
+    return true;
+  }
+  //-------------------------------------------------------------------------
+  else if (
+    boardSituation[2] === playerNum &&
+    boardSituation[4] === playerNum &&
+    boardSituation[6] === 0
+  ) {
+    playerNum === player
+      ? console.log(
+          `playerNum: ${playerNum} and turn: ${turn}. checkCompliments found win`
+        )
+      : console.log(
+          `playerNum: ${playerNum} and turn: ${turn}. checkCompliments prevented a loss`
+        );
+    caseIndex = 6;
+    return true;
+  } else if (
+    boardSituation[2] === playerNum &&
+    boardSituation[6] === playerNum &&
+    boardSituation[4] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 4;
+    return true;
+  } else if (
+    boardSituation[4] === playerNum &&
+    boardSituation[6] === playerNum &&
+    boardSituation[2] === 0
+  ) {
+    playerNum === player
+      ? console.log("checkCompliments found win")
+      : console.log("checkCompliments prevented a loss");
+    caseIndex = 2;
+    return true;
+  } else {
+    console.log("couldn't find anything");
+    return false;
+  }
+};
+
+const level2 = function (player) {
+  //level2 doens't recognize occupied cases.
+  //why not use the same function and pass turn the first time and 3-turn the second time.
+  console.log("level2 said turn is : " + player);
+  checkCompliments(player) || checkCompliments(3 - player) || level1(); //lookForLoses()
+};
 //activate only when its called by player1?
 //how can I make it go first??
 //should I put the whole function inside settimeout???
+const level1 = function () {
+  console.log("level1 to play");
+  let caseRandom = Math.floor(Math.random() * casesLeft);
+  console.log("level1 played random");
+  caseIndex = casesLeftIndexes[caseRandom];
+};
 const compMove = function () {
   if (turn === 2 && level !== 0) {
     console.log("turn at computer: " + turn);
+    player = turn; //why did I created player? so I can make turn = 0 early at the call. and I don't need to use 3-turn
     turn = 0; //why???
-    const player = 2;
-    console.log("computer is thinking");
-    console.log("level1 to play");
-    let caseRandom = Math.floor(Math.random() * casesLeft);
-    console.log("level1 played random");
-    let caseIndex = casesLeftIndexes[caseRandom];
+
+    caseIndex = -1; //just to make sure I'm not getting an old caseIndex value.
+    //use switch case instead???
+    if (level === 1) {
+      level1();
+    } else if (level === 2) {
+      level2(player);
+    }
     caseEl[caseIndex].querySelector("div").classList.add("o");
     //update casesLeftIndex
     updateCasesLeftIndexes(caseIndex);
