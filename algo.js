@@ -19,7 +19,7 @@ const lLineEl = document.getElementById("lLine");
 const selectLevelEl = document.getElementById("select-level");
 
 //========================= Global Variables ============================
-let turn = 2;
+let turn = 1;
 let player = turn; // I made it globale so I can use it inside checkCompliments to compare the winner
 let gamesCounter = 0;
 const boardSituation = new Array(9).fill(0);
@@ -533,13 +533,8 @@ const strategy1 = function () {
     caseIndex = 0;
     console.log("level3 played strategy");
     return true;
-  } else if (casesLeft === 8) {
-    if (boardSituation[4] === 0) {
-      caseIndex = 4;
-      console.log("level3 played case 4");
-      return true;
-    }
   }
+
   //2nd move
   else if (casesLeft === 7) {
     if (boardSituation[1] === 3 - player) {
@@ -573,6 +568,7 @@ const strategy1 = function () {
       caseIndex = 6;
       return true;
     }
+
     //2nd to play
     else {
       console.log("level3 didn't find strategy");
@@ -588,6 +584,23 @@ const strategy1 = function () {
       console.log("level3 played strategy");
     }
     return true;
+  }
+  //2nd to start
+  else if (casesLeft === 8) {
+    if (boardSituation[4] === 0) {
+      caseIndex = 4;
+      console.log("level3 played case 4");
+      return true;
+    }
+  } else if (casesLeft === 6) {
+    if (
+      (boardSituation[0] === 3 - player && boardSituation[8] === 3 - player) ||
+      (boardSituation[2] === 3 - player && boardSituation[6] === 3 - player)
+    ) {
+      caseIndex = 2 * Math.floor(Math.random() * 4) + 1; //Play randomely 1 or 3 or 5 or 7
+      console.log("level3 played strategy");
+      return true;
+    }
   } else {
     console.log("level3 couldn't find strategy");
     return false;
