@@ -226,6 +226,7 @@ const player2move = function () {
     level === 0 &&
     !this.querySelector("div").hasAttribute("class")
   ) {
+    turn = 0; //to prevent player2 from clicking twice
     const player = 2;
     let clickedEl = this;
     //draw move
