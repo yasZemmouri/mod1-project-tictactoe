@@ -43,7 +43,8 @@ const reset = function () {
     //reset reset
     resetEl.style.display = "none";
     //reset p
-    pEl[0].style.top = "-80px";
+    pEl[0].style.top = "-90px";
+    pEl[0].style.visibility = "hidden";
     //reset cases left
     casesLeft = 9;
   }
@@ -199,6 +200,7 @@ const gameOver = function (winner) {
   resetEl.style.display = "block";
   // pEl[0].style.visibility = "visible";
   pEl[0].style.top = "0";
+  pEl[0].style.visibility = "visible";
 };
 const player1move = function () {
   //   this.textContent = "X";

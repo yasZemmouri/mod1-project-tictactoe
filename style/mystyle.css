@@ -372,9 +372,10 @@ p {
   /* visibility: hidden; */
   display: inline-block;
   position: relative;
+  visibility: hidden;
   top: -90px;
   font-size: 1.5rem;
-  transition: top 0.6s;
+  transition: top 0.6s, visibility 0.6s;
   transition-delay: 0.1s;
   padding: 0.5em 1em;
   border-radius: 5px;
