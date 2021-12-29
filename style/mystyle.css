@@ -403,11 +403,11 @@ p {
     font-size: 6vw;
     width: 500px;
     max-width: 98vw;
-    position: absolute;
+    /* position: absolute;
     margin: auto;
     left: 0;
     right: 0;
-    text-align: center;
+    text-align: center; */
     padding-top: 20px;
   }
 }
