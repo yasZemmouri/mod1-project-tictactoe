@@ -361,7 +361,7 @@ p {
 }
 @media only screen and (max-width: 400px) {
   #game-container {
-    height: 55vh;
+    height: 58vh;
   }
   #o-player,
   #x-player {
@@ -397,7 +397,7 @@ p {
     height: 220px;
   }
   footer {
-    padding-bottom: 30px;
+    padding-bottom: 25px;
   }
   p {
     font-size: 6vw;
