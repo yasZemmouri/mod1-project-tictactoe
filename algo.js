@@ -19,7 +19,7 @@ const lLineEl = document.getElementById("lLine");
 const selectLevelEl = document.getElementById("select-level");
 
 //========================= Global Variables ============================
-let turn = 1;
+let turn = 2;
 let player = turn; // I made it globale so I can use it inside checkCompliments to compare the winner
 let gamesCounter = 0;
 const boardSituation = new Array(9).fill(0);
@@ -526,6 +526,84 @@ const checkCompliments = function (playerNum) {
   }
 };
 
+const strategy1 = function () {
+  //1st move
+  //if side you can play middle aleatory
+  if (casesLeft === 9) {
+    caseIndex = 0;
+    console.log("level3 played strategy");
+    return true;
+  } else if (casesLeft === 8) {
+    if (boardSituation[4] === 0) {
+      caseIndex = 4;
+      console.log("level3 played case 4");
+      return true;
+    }
+  }
+  //2nd move
+  else if (casesLeft === 7) {
+    if (boardSituation[1] === 3 - player) {
+      caseIndex = 6;
+      console.log("level3 played strategy");
+      return true;
+    } else if (boardSituation[3] === 3 - player) {
+      caseIndex = 2;
+      console.log("level3 played strategy");
+      return true; //
+    } else if (boardSituation[4] === 3 - player) {
+      caseIndex = 8;
+      console.log("level3 played strategy");
+      return true; //
+    } else if (
+      boardSituation[7] === 3 - player ||
+      boardSituation[5] === 3 - player
+    ) {
+      caseIndex = 4;
+      console.log("level3 played stratgy");
+      return true; //
+    } else if (
+      boardSituation[6] === 3 - player ||
+      boardSituation[2] === 3 - player
+    ) {
+      caseIndex = 8;
+      console.log("level3 played stratgy");
+      return true; //
+    } else if (boardSituation[8] === 3 - player) {
+      console.log("level3 played stratgy");
+      caseIndex = 6;
+      return true;
+    }
+    //2nd to play
+    else {
+      console.log("level3 didn't find strategy");
+      return false;
+    }
+  }
+  //3rd move
+  else if (casesLeft === 5) {
+    if (boardSituation[8] === 0) caseIndex = 8;
+    // else if (boardSituation[2] === 0) caseIndex = 2;
+    else {
+      caseIndex = 2;
+      console.log("level3 played strategy");
+    }
+    return true;
+  } else {
+    console.log("level3 couldn't find strategy");
+    return false;
+  }
+};
+const level3 = function (player) {
+  //check if player is about to win
+  console.log(player);
+  console.log("level3 called checkCompliments(player)");
+  checkCompliments(player) ||
+    //check if opponent is about to win (3 - turn is the opponent number)
+    checkCompliments(3 - player) ||
+    strategy1(player) ||
+    level1();
+};
+
 const level2 = function (player) {
   //level2 doens't recognize occupied cases.
   //why not use the same function and pass turn the first time and 3-turn the second time.
@@ -553,6 +631,8 @@ const compMove = function () {
       level1();
     } else if (level === 2) {
       level2(player);
+    } else if (level === 3) {
+      level3(player);
     }
     caseEl[caseIndex].querySelector("div").classList.add("o");
     //update casesLeftIndex
