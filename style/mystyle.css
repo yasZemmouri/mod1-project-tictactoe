@@ -120,7 +120,7 @@ option {
     height: 300px; */
   /* z-index: 2000; */
   backdrop-filter: blur(3px);
-  background-color: rgba(255, 255, 255, 0.82);
+  background-color: rgba(255, 255, 255, 0.86);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
