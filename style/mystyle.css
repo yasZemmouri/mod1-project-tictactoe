@@ -360,6 +360,9 @@ p {
   box-shadow: 1px 3px 8px 3px rgba(0, 0, 0, 0.2);
 }
 @media only screen and (max-width: 400px) {
+  #game-container {
+    height: 60vh;
+  }
   #o-player,
   #x-player {
     width: 30px;
@@ -398,6 +401,13 @@ p {
   }
   p {
     font-size: 6vw;
+    width: 500px;
     max-width: 98vw;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding-top: 20px;
   }
 }
