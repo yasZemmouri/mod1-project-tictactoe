@@ -361,7 +361,7 @@ p {
 }
 @media only screen and (max-width: 400px) {
   #game-container {
-    height: 60vh;
+    height: 55vh;
   }
   #o-player,
   #x-player {
