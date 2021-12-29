@@ -245,6 +245,7 @@ const player2move = function () {
     caseIndex = parseInt(clickedEl.id[1]);
     //update board
     updateBoard(player, caseIndex);
+    updateCasesLeftIndexes(caseIndex); //In case we switch to computer while in middle of the game.
     //check if Win
     checkWin(player) || checkFullBoard();
     //can we make update board do the parseInt part???
