@@ -59,7 +59,7 @@ const reset = function () {
   //reset caseIndex
   caseIndex = -1;
 
-  console.log("game reseted");
+  // console.log("game reseted");
   setTimeout(function () {
     console.log("reset calling compMove()");
     compMove();
@@ -68,7 +68,7 @@ const reset = function () {
 
 const updateBoard = function (player, caseIndex) {
   boardSituation[caseIndex] = player;
-  console.log("board updated");
+  // console.log("board updated");
   //tester
   let myvar = "";
   for (let i = 0; i < 9; i++) {
@@ -82,18 +82,22 @@ const updateCasesLeftIndexes = function (caseIndex) {
   //if it finds return it's index.
 
   let m = casesLeftIndexes.indexOf(caseIndex);
-  //swap
-  [casesLeftIndexes[m], casesLeftIndexes[casesLeft - 1]] = [
-    casesLeftIndexes[casesLeft - 1],
-    [casesLeftIndexes[m]],
-  ];
-  casesLeftIndexes.pop();
+  // //swap
+  // [casesLeftIndexes[m], casesLeftIndexes[casesLeft - 1]] = [
+  //   casesLeftIndexes[casesLeft - 1],
+  //   [casesLeftIndexes[m]],
+  // ];
+  // casesLeftIndexes.pop();
+  let k = casesLeftIndexes.splice(m, 1);
+  console.log("cseIndex: " + caseIndex);
+  console.log("element removed: " + k);
   //test swap
   let myvar = "";
   for (let i = 0; i < casesLeftIndexes.length; i++) {
     myvar = myvar + " " + casesLeftIndexes[i];
   }
   console.log("casesLeftIndexes: " + myvar);
+  console.log(casesLeftIndexes);
 };
 
 const checkWin = function (winner) {
@@ -129,13 +133,13 @@ const checkWin = function (winner) {
       //maybe I should have one gameOver and call it once.
       console.log("You Win");
       xScoreEl.textContent = ++xScore;
-      console.log("checkWinner called gameOver");
+      // console.log("checkWinner called gameOver");
       gameOver(winner);
       return true;
     } else if (winner == 2) {
       console.log("You Lose");
       oScoreEl.textContent = ++oScore;
-      console.log("checkWinner called gameOver");
+      // console.log("checkWinner called gameOver");
       gameOver(winner);
       return true;
     }
@@ -147,13 +151,13 @@ const checkWin = function (winner) {
 //decrement cases left
 //if no more cases left call game over.
 const checkFullBoard = function () {
-  console.log("checkFullBoard was called");
+  // console.log("checkFullBoard was called");
   casesLeft--;
   console.log("cases left: " + casesLeft); //test
   if (casesLeft === 0) {
-    console.log("checkFullBoard stopped the game");
-    console.log("No more moves");
-    console.log("checkFullBoard called gameOver");
+    // console.log("checkFullBoard stopped the game");
+    // console.log("No more moves");
+    // console.log("checkFullBoard called gameOver");
     gameOver(casesLeft);
     return true;
   } else return false;

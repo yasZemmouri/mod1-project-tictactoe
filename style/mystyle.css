@@ -223,12 +223,14 @@ select {
   position: relative;
   width: 70px;
   height: 70px;
-  scale: 0;
+  /* scale: 0.1; */
   /* top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); */
   border: 12px solid orangered;
   border-radius: 50%;
+  -webkit-boorder-radius: 50%;
+  -moz-border-radius: 50%;
   /* box-shadow: 38px -38px 0 12px rgba(0, 138, 0, 0.5),
     -38px -38px 0 12px rgba(0, 138, 0, 0.5),
     -38px 38px 0 12px rgba(0, 138, 0, 0.5),
@@ -240,7 +242,7 @@ select {
   from {
     /* width: 0;
     height: 0; */
-    transform: scale(0);
+    transform: scale(0.1);
   }
   to {
     /* width: 70px; */
