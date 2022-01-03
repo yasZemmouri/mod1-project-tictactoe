@@ -17,6 +17,7 @@ const oScoreEl = document.getElementById("o-score");
 const fLineEl = document.getElementById("fLine");
 const lLineEl = document.getElementById("lLine");
 const selectLevelEl = document.getElementById("select-level");
+const suggestionEl = document.getElementById("suggestion");
 
 //========================= Global Variables ============================
 let turn = 1;
@@ -206,6 +207,13 @@ const gameOver = function (winner) {
   pEl[0].style.top = "0";
   pEl[0].style.visibility = "visible";
 };
+const removeSuggest = function () {
+  const caseSuggest = document.querySelector(".suggestion");
+  if (caseSuggest) {
+    caseSuggest.classList.remove("suggestion");
+    return true;
+  } else return false;
+};
 const player1move = function () {
   //   this.textContent = "X";
   if (turn === 1 && !this.querySelector("div").hasAttribute("class")) {
@@ -213,6 +221,9 @@ const player1move = function () {
     let clickedEl = this;
     //draw move
     clickedEl.querySelector("div").classList.add("x");
+    //remove blinking suggestion if activated
+    removeSuggest();
+
     turn = 0;
     caseIndex = parseInt(clickedEl.id[1]);
     //update board
@@ -240,6 +251,8 @@ const player2move = function () {
   ) {
     player = turn;
     turn = 0; //to prevent player2 from clicking twice
+    //remove suggestion if activated
+    removeSuggest();
     caseIndex = -1;
     let clickedEl = this;
     //draw move
@@ -611,6 +624,19 @@ const strategy1 = function () {
     return false;
   }
 };
+const suggestion = function () {
+  player = turn;
+  console.log("casesLeft: " + casesLeft);
+  console.log("player: " + player);
+  console.log("turn: " + turn);
+  console.log(boardSituation[4] === 3 - turn);
+  console.log(boardSituation[4] === 3 - player);
+
+  level3(player);
+  console.log("caseIndex: " + caseIndex);
+  caseEl[caseIndex].classList.add("suggestion");
+  caseIndex = -1;
+};
 const level3 = function (player) {
   //check if player is about to win
   console.log(player);
@@ -640,6 +666,7 @@ const level1 = function () {
 const compMove = function () {
   if (turn === 2 && level !== 0) {
     console.log("turn at computer: " + turn);
+    removeSuggest();
     player = turn; //why did I created player? so I can make turn = 0 early at the call. and I don't need to use 3-turn
     turn = 0; //why???
 
@@ -693,6 +720,7 @@ caseEl[6].addEventListener("click", player2move);
 caseEl[7].addEventListener("click", player2move);
 caseEl[8].addEventListener("click", player2move);
 resetEl.addEventListener("click", reset);
+suggestionEl.addEventListener("click", suggestion);
 selectLevelEl.addEventListener("change", function () {
   level = parseInt(selectLevelEl.value);
   console.log("Level: " + level);

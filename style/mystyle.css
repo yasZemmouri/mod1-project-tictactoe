@@ -26,6 +26,8 @@ nav {
   /* background-color: red; */
   /* overflow: hidden; */
   position: relative;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 /*why do I have case twice???*/
@@ -55,6 +57,7 @@ nav {
   position: absolute;
   /* background-color: rosybrown; */
   left: 120px;
+  pointer-events: none;
 }
 
 .hlines {
@@ -433,5 +436,21 @@ p {
     right: 0;
     text-align: center; */
     padding-top: 20px;
+  }
+}
+#suggestion,
+#level-container {
+  display: inline-block;
+}
+.suggestion {
+  background-color: aqua;
+  animation: blink 0.9s steps(2, start) infinite;
+}
+@keyframes blink {
+  from {
+    background-color: rgba(0, 255, 255, 0.52);
+  }
+  to {
+    background-color: transparent;
   }
 }

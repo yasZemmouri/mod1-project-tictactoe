@@ -19,19 +19,20 @@
       <a href="multi.html">multiple boards</a>
     </nav>
     <p>Click anywhere to continue.</p>
-    <div id="level-container">
-      <select name="level" id="select-level">
-        <option value="0">PvsP</option>
-        <option value="1">Easy</option>
-        <option value="2">Medium</option>
-        <option value="3">Hard</option>
-      </select>
+    <div>
+      <div id="level-container">
+        <select name="level" id="select-level">
+          <option value="0">PvsP</option>
+          <option value="1">Easy</option>
+          <option value="2">Medium</option>
+          <option value="3">Hard</option>
+        </select>
+      </div>
+      <button type="button" id="suggestion">Suggestion</button>
     </div>
     <!-- <button id="reset">reset</button> -->
     <div id="game-container">
       <div id="container1">
-        <div class="vlines"></div>
-        <div class="hlines"></div>
         <div id="c0" class="case"><div></div></div>
         <div id="c1" class="case"><div></div></div>
         <div id="c2" class="case"><div></div></div>
@@ -41,6 +42,8 @@
         <div id="c6" class="case"><div></div></div>
         <div id="c7" class="case"><div></div></div>
         <div id="c8" class="case"><div></div></div>
+        <div class="vlines"></div>
+        <div class="hlines"></div>
         <!-- ------------------------------------------------------- -->
         <div id="gameOver" class="old">
           <div>
