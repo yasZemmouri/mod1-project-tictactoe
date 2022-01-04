@@ -116,7 +116,6 @@ nav {
 } */
 option {
   padding: 200px;
-  background-color: red;
 }
 #gameOver {
   position: absolute;
@@ -386,6 +385,7 @@ p {
   padding: 0.5em 1em;
   border-radius: 5px;
   box-shadow: 1px 3px 8px 3px rgba(0, 0, 0, 0.2);
+  margin-bottom: 5px;
 }
 @media only screen and (max-width: 400px) {
   #game-container {
@@ -439,13 +439,47 @@ p {
     padding-top: 20px;
   }
 }
-#suggestion,
+#suggestion {
+  display: inline-block;
+  font-size: 1.4em;
+  border-radius: 10px;
+  padding: 4px 16px;
+  color: white;
+  /* border: none;
+  background-image: linear-gradient(#663399, blueviolet);
+  color: white; */
+  cursor: pointer;
+  outline: 0;
+  border: 1px solid black;
+  position: relative;
+  background-color: transparent;
+}
+#suggestion::after {
+  content: "";
+  background-color: #663399c0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  top: 5px;
+  left: 6px;
+  transition: 0.2s;
+  border-radius: 10px;
+}
+#suggestion:hover::after {
+  top: 0px;
+  left: 0px;
+}
+
 #level-container {
   display: inline-block;
 }
 .suggestion {
   background-color: aqua;
   animation: blink 0.9s steps(2, start) infinite;
+}
+select {
+  font-size: 1.3em;
 }
 @keyframes blink {
   from {
