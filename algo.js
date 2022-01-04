@@ -173,9 +173,6 @@ const gameOver = function (winner) {
     fLineEl.classList.add("x");
     lLineEl.textContent = "You win";
   } else if (winner === 2) {
-    // pEl[0].querySelector("div").classList.add("o");
-    // pEl[1].textContent = "You lose";
-    // gameOverEl.classList.add("stroke-txt");
     fLineEl.classList.add("o");
     lLineEl.textContent = "You lose";
   } else if (winner === 0) {
