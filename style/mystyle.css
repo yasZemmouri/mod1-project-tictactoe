@@ -456,7 +456,7 @@ p {
 #suggestion {
   display: inline-block;
   font-size: 1.2em;
-  border-radius: 10px;
+  border-radius: 6px;
   padding: 4px 14px;
   color: #99cc66;
   /* border: none;
