@@ -26,8 +26,8 @@ nav {
   /* background-color: red; */
   /* overflow: hidden; */
   position: relative;
-  border-radius: 10px;
-  overflow: hidden;
+  /* border-radius: 10px;
+  overflow: hidden; */
 }
 
 /*why do I have case twice???*/
@@ -48,6 +48,7 @@ nav {
   /* z-index: 1000; */
   /* background-color: rgb(13, 0, 138); */
   overflow: hidden;
+  border-radius: 10px;
 }
 
 .vlines,
